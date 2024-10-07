@@ -7,7 +7,7 @@ int userPreferences[NUM_USERS][NUM_ITEMS];
 
 /* 함수 원형 선언 */
 void initializePreferences(int preferences[NUM_USERS][NUM_ITEMS]);
-void findRecommendedItems(int preferences[NUM_USERS][NUM_ITEMS]);
+void findRecommendedItems(const int preferences[NUM_USERS][NUM_ITEMS]);
 
 /* main logic */
 int main(){
@@ -28,7 +28,7 @@ void initializePreferences(int preferences[NUM_USERS][NUM_ITEMS]){
 }
 
 /* find and print each user's preference */ 
-void findRecommendedItems(int preferences[NUM_USERS][NUM_ITEMS]){
+void findRecommendedItems(const int preferences[NUM_USERS][NUM_ITEMS]){
     // if preferences score is same recommend faster index
     for(int i = 0; i < NUM_USERS; ++i){
         int maxPreferenceIndex = 0;
