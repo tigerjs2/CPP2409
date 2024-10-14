@@ -8,8 +8,8 @@
                 "-std=c++14",
                 "-fdiagnostics-color=always",
                 "-g",
-                // "${file}", 열린 파일만 컴파일한다
-                "${fileDirname}\\**.cpp",
+                "${file}", // 열린 파일만 컴파일한다
+                // "${fileDirname}\\**.cpp", // 다중 컴파일
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
