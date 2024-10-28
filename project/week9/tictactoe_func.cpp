@@ -5,7 +5,7 @@
 */
 #include <iostream>
 using namespace std;
-const int numCell = 3; // 보드판의 가로 세로 길이, 함수의 매개변수 크기에 활용하기 위해 전역변수화
+const int numCell = 5; // 보드판의 가로 세로 길이, 함수의 매개변수 크기에 활용하기 위해 전역변수화
 
 bool isValid(int x, int y, int num, char board[numCell][numCell]);
 bool checkWin(char currentUser, int num, char board[numCell][numCell]);
@@ -200,43 +200,49 @@ bool isValid(int x, int y, int num, char board[numCell][numCell]){
 bool checkWin(char currentUser, int num, char board[numCell][numCell]){
     bool isWin = false;
     // 6.1. 가로/세로 돌 체크하기
-	for (int i = 0; i < num; i++) {
-		if (board[i][0] == currentUser && board[i][1] == currentUser && board[i][2] == currentUser) {
-			cout << "가로에 모두 돌이 놓였습니다!!";
+	// 가로
+	for (int i = 0; i < num; i++) { // 체크할 행
+		for(int k = 0; k < num; k++){ // 한 줄 체크
+			if(board[i][k] != currentUser){
+				isWin = false;
+				break;
+			}
 			isWin = true;
-			break;
 		}
-		if (board[0][i] == currentUser && board[1][i] == currentUser && board[2][i] == currentUser) {
-			cout << "세로에 모두 돌이 놓였습니다!!";
-			isWin = true;
-			break;
-		}
+		if(isWin) return isWin; // 한 줄 체크 끝날 때마다 빙고여부 확인
 	}
-    if(isWin) return isWin; // 아래로 넘어가면 승자 나와도 false될 수 있음
+	// 세로
     for (int i = 0; i < num; i++){
-
+		for(int k = 0; k < num; k++){ // 한 줄 체크
+			if(board[k][i] != currentUser){
+				isWin = false;
+				break;
+			}
+			isWin = true;
+		}
+		if(isWin) return isWin; // 한 줄 체크 끝날 때마다 빙고여부 확인
     }
-    if(isWin) return isWin; // 아래로 넘어가면 승자 나와도 false될 수 있음
+    // 가로 세로는 승자 발생 시 반복문 안에서 즉시 return 따라서 추가적인 체크 필요 X
     // 대각선
-    for(int i = 0; i < numCell; i++){
+    for(int i = 0; i < num; i++){
         if(board[i][i] != currentUser){
             isWin = false;
             break;
         }
         isWin = true;
         // 반복문의 마지막 iteration까지와서 여기가 실행되면 isWin은 true
-        if(i == numCell - 1)
+        if(i == num - 1)
             cout << "왼쪽 위에서 오른쪽 아래 대각선으로 모두 돌이 놓였습니다!" << endl;
     }
 	if(isWin) return isWin; // 아래로 넘어가면 승자 나와도 false될 수 있음
-    for(int i = 0; i < numCell; i++){
-        if(board[i][numCell - 1 - i] != currentUser){
+    for(int i = 0; i < num; i++){
+        if(board[i][num - 1 - i] != currentUser){
             isWin = false;
             break;
         }
         isWin = true;
         // 반복문의 마지막 iteration까지와서 여기가 실행되면 isWin은 true
-        if(i == numCell - 1)
+        if(i == num - 1)
             cout << "오른쪽 위에서 왼쪽 아래 대각선으로 모두 돌이 놓였습니다!" << endl;
     }
     return isWin;
