@@ -186,7 +186,7 @@ int main() {
 
 // isValid 함수는 부적절한 위치에 돌 놓기를 시도 시 false 아니면 true 반환
 bool isValid(int x, int y, int num, char board[numCell][numCell]){
-    if (x >= num || y >= num) {// 좌표 범위를 벗어날때
+    if (x >= num || y >= num || x < 0 || y < 0) {// 좌표 범위를 벗어날때
 		cout << x << "," << y << ": x와 y둘중 하나가 칸을 벗어납니다. " << endl;
 		return false;
 	}
@@ -212,6 +212,10 @@ bool checkWin(char currentUser, int num, char board[numCell][numCell]){
 			break;
 		}
 	}
+    if(isWin) return isWin; // 아래로 넘어가면 승자 나와도 false될 수 있음
+    for (int i = 0; i < num; i++){
+
+    }
     if(isWin) return isWin; // 아래로 넘어가면 승자 나와도 false될 수 있음
     // 대각선
     for(int i = 0; i < numCell; i++){

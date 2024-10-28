@@ -57,7 +57,7 @@ int main() {
 			// TODO 1: 3자리 숫자의 자릿수를 추출하고, 모든 수가 다른지 체크하는 코드블록 작성
 
             guessThird = userNumber % 10; // 10으로 나눈 나머지는 1의 자리만 남음
-            guessSecond = (userNumber % 100 - guessThird) / 10; // % 100으로 백의 자리 제거 후 1의 자리 빼주고 10으로 나눠 10의 자리 구함
+            guessSecond = (userNumber % 100) / 10; // % 100으로 백의 자리 제거 10으로 나눈 나머지로 10의 자리 구함
             guessFirst = userNumber / 100; // 100으로 나눈 몫은 100의 자리만 남음
 
             // 세 수가 모두 다르면 same은 true, 모두 만족해야하니 AND 연산
