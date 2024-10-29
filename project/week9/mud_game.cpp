@@ -15,7 +15,7 @@ bool checkXY(int user_x, int mapX, int user_y, int mapY, int &hp);
 void displayMap(int map[][mapX], int user_x, int user_y);
 bool checkGoal(int map[][mapX], int user_x, int user_y);
 void checkState(int map[][mapX], int user_x, int user_y, int&hp);
-bool checkHP(int &hp);
+bool checkHP(int hp);
 
 // 메인  함수
 int main() {
@@ -106,6 +106,7 @@ int main() {
 		if(!(checkHP(hp))){
 			break;
 		}
+		// 맵 상의 요소들과 만났는지 체크 후 상호작용
 		checkState(map, user_x, user_y, hp);
 		// 몬스터 조우로 체력 고갈됐는지 체크
 		if(!(checkHP(hp))){
@@ -156,9 +157,11 @@ void displayMap(int map[][mapX], int user_x, int user_y) {
 	}
 }
 
+// 체력에 영향을 줄 필요가 있는 함수들은 int &hp를 인자로 가짐
+
 // 이동하려는 곳이 유효한 좌표인지 체크하는 함수
 bool checkXY(int user_x, int mapX, int user_y, int mapY, int &hp) {
-	bool checkFlag = false;
+	bool checkFlag = false; // 이동 가능 시 true
 	if (user_x >= 0 && user_x < mapX && user_y >= 0 && user_y < mapY) {
 		checkFlag = true;
 	}
@@ -183,23 +186,23 @@ bool checkGoal(int map[][mapX], int user_x, int user_y) {
 
 // 유저가 요소들을 만났을 때 작용 목적지 안내문은 따로 있으니 포함 X
 void checkState(int map[][mapX], int user_x, int user_y, int &hp){
-	int encounter = map[user_y][user_x];
+	int encounter = map[user_y][user_x]; // 이동 후 유저 좌표에 원래 있던 요소
 	switch(encounter){
-		case 1:
+		case 1: // 아이템 조우
 			cout << "아이템이 있습니다" << endl;
 			break;
-		case 2:
+		case 2: // 적 조우
 			cout << "적이 있습니다. HP가 2 줄어듭니다." << endl;
 			hp -= 2;
 			break;
-		case 3:
+		case 3: // 포션 조우
 			cout << "포션이 있습니다. HP가 2 증가합니다." << endl;
 			hp += 2;
 			break;
 	}
 }
 // 유저 잔여 체력 0이하인지 체크하는 함수
-bool checkHP(int &hp){
+bool checkHP(int hp){
 	bool isAlive = true;
 	if(hp <= 0){
 			cout << "HP가 0 이하가 되었습니다. 실패했습니다." << endl;
