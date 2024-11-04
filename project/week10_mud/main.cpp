@@ -1,23 +1,20 @@
 /*
 이 코드를 작성할 때마다 시스템 설정을 바꾸기는 번거로워 다음과 같은 환경에서 작성함
 해당 소스 코드는 VS Code의 코드 인코딩을 EUC-KR, PC의 시스템 인코딩을 EUC-KR로 통일한 상태로 작성됨
+분할 소스 파일도 모두 인코딩 통일
 */
-
 #include <iostream>
 #include <string>
 #include "user.h"
 using namespace std;
-
 const int mapX = 5;
 const int mapY = 5;
-
 // 사용자 정의 함수
 bool checkXY(int user_x, int mapX, int user_y, int mapY, User &user);
 void displayMap(int map[][mapX], int user_x, int user_y);
 bool checkGoal(int map[][mapX], int user_x, int user_y);
 void checkState(int map[][mapX], int user_x, int user_y, User &user);
 bool CheckUser(User user);
-
 // 메인  함수
 int main() {
 	User user{}; // 유저 객체 생성
@@ -30,13 +27,10 @@ int main() {
 	// 유저의 위치를 저장할 변수
 	int user_x = 0; // 가로 번호
 	int user_y = 0; // 세로 번호
-
 	// 게임 시작 
 	while (1) { // 사용자에게 계속 입력받기 위해 무한 루프
-
 		// 사용자의 입력을 저장할 변수
 		string user_input = "";
-
 		cout << "현재 HP: " << user.GetHP() << " 명령어를 입력하세요 (상,하,좌,우,지도,종료): ";
 		cin >> user_input;
         
@@ -68,7 +62,6 @@ int main() {
 			// TODO: 왼쪽으로 이동하기
 			user_x -= 1;
 			bool inMap = checkXY(user_x, mapX, user_y, mapY, user);
-
 			if (inMap == false) {
 				user_x += 1;
 			}
@@ -102,7 +95,6 @@ int main() {
 			cout << "잘못된 입력입니다." << endl;
 			continue;
 		}
-
 		// 이동으로 체력이 고갈됐는지 체크
 		if(!(CheckUser(user))){
 			break;
@@ -123,8 +115,6 @@ int main() {
 	}
 	return 0;
 }
-
-
 // 지도와 사용자 위치 출력하는 함수
 void displayMap(int map[][mapX], int user_x, int user_y) {
 	for (int i = 0; i < mapY; i++) {
@@ -157,9 +147,7 @@ void displayMap(int map[][mapX], int user_x, int user_y) {
 		cout << " -------------------------------- " << endl;
 	}
 }
-
 // 체력에 영향을 줄 필요가 있는 함수들은 int &hp를 인자로 가짐
-
 // 이동하려는 곳이 유효한 좌표인지 체크하는 함수
 bool checkXY(int user_x, int mapX, int user_y, int mapY, User &user) {
 	bool checkFlag = false; // 이동 가능 시 true
@@ -175,7 +163,6 @@ bool checkXY(int user_x, int mapX, int user_y, int mapY, User &user) {
 		user.DecreaseHP(1); // 유저 객체 체력 감소
 	return checkFlag;
 }
-
 // 유저의 위치가 목적지인지 체크하는 함수
 bool checkGoal(int map[][mapX], int user_x, int user_y) {
 	// 목적지 도착하면
@@ -184,7 +171,6 @@ bool checkGoal(int map[][mapX], int user_x, int user_y) {
 	}
 	return false;
 }
-
 // 유저가 요소들을 만났을 때 작용 목적지 안내문은 따로 있으니 포함 X
 // 체력 증감 객체 동작 사용
 void checkState(int map[][mapX], int user_x, int user_y, User &user){
@@ -222,8 +208,8 @@ bool CheckUser(User user){
     if (remain <= 0){
         cout << "HP가 0 이하가 되었습니다. 실패했습니다." << endl;
 		cout << "게임을 종료합니다." << endl;
-        return false;
+        return false; // 0 이하
     }
     else
-        return true;
+        return true; // 체력 남음
 }
