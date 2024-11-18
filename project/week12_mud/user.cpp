@@ -18,7 +18,3 @@ int User::itemCnt(){
 // increase item once
 void User::increaseItem(){item++;}
 
-ostream& operator<<(ostream& os, User &v){
-    os << "현재 HP는 " << v.GetHP() << "이고, 먹은 아이템은 총 " << v.itemCnt() << "개 입니다" << endl;
-    return os;
-}

@@ -104,7 +104,8 @@ int main() {
 			break;
 		}
 		// 맵 상의 요소들과 만났는지 체크 후 상호작용
-		checkState(map, user_x, user_y, user);
+		if(user_input != "정보" && user_input != "지도") // 제자리 동작에는 상태 체크 x
+			checkState(map, user_x, user_y, user);
 		// 몬스터 조우로 체력 고갈됐는지 체크
 		if(!(CheckUser(user))){
 			break;
