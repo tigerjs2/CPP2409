@@ -16,12 +16,35 @@ int User::itemCnt(){
     return item;
 }
 // increase item once
-void User::increaseItem(){item++;}
+void User::increaseItem() { item++; }
+
+// Identify user's job
+string User::GetJob() { return job; }
+// get userName
+string User::GetName() { return name; }
+// get User location
+int User::GetX() { return x; }
+void User::SetX(int n) { x = n; }
+int User::GetY() { return y; }
+void User::SetY(int n) { y = n; }
+// Check if another user is on same location
+bool User::CheckOther(User& u) { return this->x == u.x && this->y == u.y; }
 
 void User::DoAttack(){
     cout << "공격합니다" << endl;
 }
 
+
+/*
+for Magician
+*/
 void Magician::DoAttack(){
     cout << "마법 사용" << endl;
+}
+
+/*
+for Warrior
+*/
+void Warrior::DoAttack(){
+    cout << "베기 사용" << endl;
 }
